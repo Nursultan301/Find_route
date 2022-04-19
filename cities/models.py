@@ -5,6 +5,8 @@ class City(models.Model):
     """ Город """
     name = models.CharField('Называние', max_length=100, unique=True)
 
+    objects = models.Manager
+
     def __str__(self):
         return self.name
 
