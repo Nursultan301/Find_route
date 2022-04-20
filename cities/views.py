@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import DetailView
 
 from cities.models import City
 
@@ -16,3 +17,6 @@ def home(request, pk=None):
     return render(request, 'cities/home.html', context)
 
 
+class CityDetailView(DetailView):
+    queryset = City.objects.all()
+    template_name = 'cities/detail.html'
