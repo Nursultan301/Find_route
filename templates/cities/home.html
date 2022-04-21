@@ -1,14 +1,31 @@
 {% extends 'base.html' %}
 {% block title %}Список городов{% endblock  %}
 {% block content %}
-<h1>Список городов</h1>
+<h2 style="text-align: center;">Список городов</h2>
 <div class="row">
-    <div class="col-md">
-        {% for object in objects_list %}
-        <p>
-            <a href="{% url 'detail' pk=object.pk %}">{{ object.name }}</a>
-        </p>
-        {% endfor %}
+    <div class="col-md-8 mx-auto my-2">
+        <table class="table table-striped">
+            {% for object in objects_list %}
+            <tr>
+                <td><a href="{% url 'detail' pk=object.pk %}">{{ object.name }}</a></td>
+                <td><a href="{% url 'update' pk=object.pk %}">
+                    <button type="submit" class="btn btn-primary">Редоктировать</button>
+                </a></td>
+                <td><a href="{% url 'delete' pk=object.pk %}">
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Добавить город">
+        </form>
     </div>
 </div>
 

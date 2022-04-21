@@ -1,9 +1,10 @@
 from django.db import models
+from django.urls import reverse
 
 
 class City(models.Model):
     """ Город """
-    name = models.CharField('Называние', max_length=100, unique=True)
+    name = models.CharField('Город', max_length=100, unique=True)
 
     objects = models.Manager
 
@@ -14,3 +15,6 @@ class City(models.Model):
         verbose_name = 'Город'
         verbose_name_plural = 'Города'
         ordering = ['name']
+
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'pk': self.pk})
