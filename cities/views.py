@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
 
 from cities.forms import HtmlForm, CityForm
 from cities.models import City
@@ -21,6 +21,13 @@ def home(request, pk=None):
     qs = City.objects.all()
     context = {'objects_list': qs, "form": form}
     return render(request, 'cities/home.html', context)
+
+
+class CityListView(ListView):
+    model = City
+    paginate_by = 2
+    context_object_name = 'objects_list'
+    template_name = 'cities/home.html'
 
 
 class CityDetailView(DetailView):
