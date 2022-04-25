@@ -7,3 +7,6 @@ from cities.models import City
 class CityAdmin(admin.ModelAdmin):
     """ Город """
     pass
+
+
+
