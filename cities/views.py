@@ -33,8 +33,7 @@ class CityListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(CityListView, self).get_context_data(**kwargs)
-        form = CityForm()
-        context['form'] = form
+        context['form'] = CityForm()
         return context
 
 

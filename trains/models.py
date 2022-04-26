@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class Train(models.Model):
@@ -10,6 +11,7 @@ class Train(models.Model):
     to_city = models.ForeignKey("cities.City", on_delete=models.CASCADE,
                                 related_name='to_city_set',
                                 verbose_name="В какой город")
+    objects = models.Manager()
 
     class Meta:
         verbose_name = "Поезд"
@@ -18,3 +20,15 @@ class Train(models.Model):
 
     def __str__(self):
         return f'Поезд №{self.name} из города {self.from_city}'
+
+    def clean(self):
+        if self.from_city == self.to_city:
+            raise ValidationError("Изменить город прибытия")
+        qs = Train.objects.filter(
+                                  travel_time=self.travel_time).exclude(pk=self.pk)
+        if qs.exists():
+            raise ValidationError("Измените время в пути")
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
