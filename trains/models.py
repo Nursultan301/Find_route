@@ -25,6 +25,7 @@ class Train(models.Model):
         if self.from_city == self.to_city:
             raise ValidationError("Изменить город прибытия")
         qs = Train.objects.filter(from_city=self.from_city,
+                                  to_city=self.to_city,
                                   travel_time=self.travel_time).exclude(pk=self.pk)
         if qs.exists():
             raise ValidationError("Измените время в пути")
