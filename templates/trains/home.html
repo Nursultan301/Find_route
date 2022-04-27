@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Список поездов{% endblock  %}
+{% block content %}
+<h2 style="text-align: center;">Список поездов</h2>
+<div class="row">
+    <div class="col-md-8 mx-auto my-2">
+        <table class="table table-striped">
+            <tr>
+                <th>Номер</th>
+                <th>Откуда</th>
+                <th>Куда</th>
+                <th>Время пути</th>
+                <th>Редоктировать</th>
+                <th>Удалить</th>
+            </tr>
+            {% for object in objects_list %}
+            <tr>
+                <td><a href="{% url 'detail' pk=object.pk %}">{{ object.name }}</a></td>
+                <td>{{ object.from_city }}</td>
+                <td>{{ object.to_city }}</td>
+                <td style="text-align: center;">{{ object.travel_time }}</td>
+                <td><a href="{% url 'update' pk=object.pk %}">
+                    <button type="submit" class="btn btn-primary">Редоктировать</button>
+                </a></td>
+                <td><a href="{% url 'delete' pk=object.pk %}">
+                    <button type="submit" class="btn btn-danger">Удалить</button>
+                </a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            {% if page_obj.has_other_pages %}
+            {% if page_obj.has_previous %}
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            {% endif %}
+        </li>
+        {% for page in page_obj.paginator.page_range  %}
+            <li class="page-item {% if page == page_obj.number %} active {% endif %}">
+                <a class="page-link" href="?page={{ page }}">
+                    {{ page }}
+                </a>
+            </li>
+        {% endfor %}
+        <li class="page-item">
+            {% if page_obj.has_next %}
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+            {% endif %}
+            {% endif %}
+        </li>
+    </ul>
+</nav>
+{% endblock  %}

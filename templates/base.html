@@ -1,5 +1,6 @@
 <!doctype html>
 {% url 'home' as home %}
+{% url 'trains' as trains %}
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -22,8 +23,8 @@
             <li class="nav-item {% if request.path == home %}active{% endif %}">
                 <a class="nav-link" href="{% url 'home' %}">Города </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+            <li class="nav-item {% if request.path == trains %}active{% endif %}">
+                <a class="nav-link " href="{% url 'trains' %}">Поезда</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
