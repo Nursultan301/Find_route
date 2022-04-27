@@ -27,8 +27,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'cities',
-    'trains',
+    'cities.apps.CitiesConfig',
+    'trains.apps.TransConfig',
+    'routes.apps.RoutesConfig',
 ]
 
 MIDDLEWARE = [
