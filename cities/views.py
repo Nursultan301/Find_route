@@ -4,7 +4,7 @@ from django.views.generic import DetailView, CreateView, UpdateView, DeleteView,
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 
-from cities.forms import HtmlForm, CityForm
+from cities.forms import CityForm
 from cities.models import City
 
 

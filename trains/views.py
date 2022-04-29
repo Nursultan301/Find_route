@@ -13,7 +13,6 @@ class TrainListView(ListView):
     model = Train
     template_name = "trains/home.html"
     paginate_by = 5
-    context_object_name = 'objects_list'
 
 
 class TrainDetailView(DetailView):
