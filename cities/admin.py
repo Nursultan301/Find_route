@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import City
+
+
+@admin.register(City)
+class AdminCity(admin.ModelAdmin):
+    pass
