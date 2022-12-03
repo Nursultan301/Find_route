@@ -2,5 +2,12 @@
 {% block title %} Главная страница{% endblock title %}
 
 {% block content %}
-
+    <h1>Список городов</h1>
+    <div class="row">
+        <div class="col-md">
+            {% for q in qs %}
+                <a href="{% url 'cities:detail' pk=q.id %}"><p>{{ q.title }}</p></a>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock content %}
