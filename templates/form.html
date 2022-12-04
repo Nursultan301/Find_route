@@ -4,7 +4,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn {{ btn }}">{{ button }}</button>
-            {% block close %}{% endblock close %}
+            <a href="{% url 'cities:home' %}"><button class="btn btn-secondary" type="button">Назад </button></a>
         </form>
     </div>
 </div>
