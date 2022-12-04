@@ -4,6 +4,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn {{ btn }}">{{ button }}</button>
+            {% block close %}{% endblock close %}
         </form>
     </div>
 </div>

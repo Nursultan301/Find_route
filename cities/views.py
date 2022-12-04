@@ -1,9 +1,13 @@
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
 
 from cities.forms import CityForm
+from cities.mixins import SuccessDeleteMessageMixin
 from cities.models import City
 
 
@@ -42,24 +46,29 @@ class CityDetailView(DetailView):
     context_object_name = 'object'
 
 
-class CityCreateView(CreateView):
+class CityCreateView(SuccessMessageMixin, CreateView):
     model = City
     form_class = CityForm
     template_name = 'cities/create.html'
     success_url = reverse_lazy('cities:home')
+    success_message = "Город успешно создан: %(title)s"
 
 
-class CityUpdateView(UpdateView):
+class CityUpdateView(SuccessMessageMixin, UpdateView):
     model = City
     form_class = CityForm
     template_name = 'cities/update.html'
     success_url = reverse_lazy('cities:home')
+    success_message = "Город успешно отредактирован: %(title)s"
 
 
-class CityDeleteView(DeleteView):
+class CityDeleteView(SuccessDeleteMessageMixin, DeleteView):
     model = City
-    # template_name = 'cities/delete.html'
+    template_name = 'cities/delete.html'
     success_url = reverse_lazy('cities:home')
+    success_message = "Город успешно удален: %(title)s"
 
-    def get(self, request, *args, **kwargs):
-        return self.post(self, request, *args, **kwargs)
+    def delete(self, request, *args, **kwargs):
+        self.add_success_message(self.request)
+        return super(CityDeleteView, self).delete(request, *args, **kwargs)
+

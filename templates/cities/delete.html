@@ -2,7 +2,11 @@
 {% block title %} Удаление города{% endblock title %}
 
 {% block content %}
-<h1>Удаление города</h1>
-    <p>{{ object }}</p>
-    {% include "form.html" with button='Удалить' btn='btn-danger' %}
+<h5 class="col-md-4 mx-0 my-4">Вы действительно хотите удалить запись? {{ object }}</h5>
+    <div class="col-md-4 d-flex">
+        <a href="{% url 'cities:home' %}">
+            <button type="submit" class="btn btn-primary mr-3">Назад</button>
+        </a>
+        {% include "form.html" with button='Удалить' btn='btn-danger' %}
+    </div>
 {% endblock content %}
