@@ -1,5 +1,6 @@
 <!doctype html>
 {% url 'cities:home' as cities_home_url %}
+{% url 'cities:create' as create %}
 {% load static %}
 <html lang="en">
 <head>
@@ -20,10 +21,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item {% if request.path == cities_home_url %}active{% endif %}">
-                    <a class="nav-link" href="#">Города <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'cities:home' %}">Города <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                <li class="nav-item {% if request.path == create %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'cities:create' %}">Добавление города</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
