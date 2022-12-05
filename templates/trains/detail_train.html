@@ -1,12 +1,10 @@
 {% extends "base.html" %}
-{% block title %} Список поездов{% endblock title %}
+{% block title %}{{ object.title }}{% endblock title %}
 
 {% block content %}
-    <h1>Список поездов</h1>
+    <h1 >Город</h1>
     <div class="row">
-        <div class="col-md-8 mx-auto my-3">
-
-
+        <div class="col-md-12 mx-auto my-3">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -19,14 +17,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for object in page_obj %}
                     <tr>
-                        <td><a href="{% url 'trains:train_detail' pk=object.pk %}">{{ object.title }}</a></td>
+                        <td>{{ object.title }}</td>
                         <td>{{ object.to_city }}</td>
                         <td>{{ object.from_city }}</td>
                         <td>{{ object.travel_time }}</td>
                     </tr>
-                {% endfor %}
                 </tbody>
             </table>
 
