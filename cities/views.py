@@ -31,7 +31,7 @@ def home(request, pk=None):
 
 class CityListView(ListView):
     model = City
-    paginate_by = 2
+    paginate_by = 10
     template_name = "cities/index.html"
 
     def get_context_data(self, **kwargs):
