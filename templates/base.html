@@ -1,6 +1,8 @@
 <!doctype html>
 {% url 'cities:home' as cities_home_url %}
 {% url 'cities:create' as create %}
+{% url 'trains:train_create' as train_create %}
+{% url 'trains:train' as train %}
 {% load static %}
 <html lang="en">
 <head>
@@ -23,16 +25,16 @@
                 <li class="nav-item {% if request.path == cities_home_url %}active{% endif %}">
                     <a class="nav-link" href="{% url 'cities:home' %}">Города <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item {% if request.path == create %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'cities:create' %}">Создать город</a>
+                </li>
 
-                <li class="nav-item">
+
+                <li class="nav-item {% if request.path == train %}active{% endif %}">
                     <a class="nav-link" href="{% url 'trains:train' %}" tabindex="-1" aria-disabled="true">Поезда</a>
                 </li>
-                <li class="nav-item {% if request.path == create %}active{% endif %}">
-                    <a class="nav-link" href="{% url 'cities:create' %}">Новый город</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'trains:train_create' %}" tabindex="-1" aria-disabled="true">Новый
+                <li class="nav-item {% if request.path == train_create %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'trains:train_create' %}" tabindex="-1" aria-disabled="true">Создать
                         поезд</a>
                 </li>
 
