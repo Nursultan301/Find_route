@@ -14,8 +14,8 @@
                     <th scope="col">Откуда</th>
                     <th scope="col">Куда</th>
                     <th scope="col">Время пути</th>
-                    <th scope="col">&nbsp;</th>
-                    <th scope="col">&nbsp;</th>
+                    <th scope="col">Редактирование</th>
+                    <th scope="col">Удаление</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,6 +25,16 @@
                         <td>{{ object.to_city }}</td>
                         <td>{{ object.from_city }}</td>
                         <td>{{ object.travel_time }}</td>
+                        <td>
+                            <a href="{% url 'trains:train_update' pk=object.pk %}">
+                                <button type="submit" class="btn btn-primary">Редактировать</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'trains:train_delete' pk=object.pk %}">
+                                <button type="submit" class="btn btn-danger">Удалить</button>
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

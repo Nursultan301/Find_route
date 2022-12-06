@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %} Удаление поезда{% endblock title %}
+
+{% block content %}
+    <h5 class="col-md-4 mx-0 my-4">Вы действительно хотите удалить запись? <a href="{% url 'trains:train_detail' pk=object.pk %}">{{ object }}</a></h5>
+    {% include "form.html" with button='Удалить' btn='btn-danger' %}
+{% endblock content %}
