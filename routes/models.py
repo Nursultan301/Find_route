@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Route(models.Model):
+class   Route(models.Model):
     title = models.CharField("Называние маршрута", max_length=50, unique=True)
     travel_times = models.PositiveSmallIntegerField("Общее время пути")
     from_city = models.ForeignKey("cities.City", on_delete=models.CASCADE, related_name='route_from_city_set',
