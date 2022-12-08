@@ -3,7 +3,6 @@
 {% url 'cities:create' as create %}
 {% url 'trains:train_create' as train_create %}
 {% url 'trains:train' as train %}
-{% url 'routes:home' as home %}
 {% load static %}
 <html lang="en">
 <head>
@@ -40,7 +39,7 @@
                         поезд</a>
                 </li>
 
-            <li class="nav-item {% if request.path == home %}active{% endif %}">
+            <li class="nav-item">
                     <a class="nav-link" href="{% url 'routes:home' %}" tabindex="-1" aria-disabled="true">Поиск
                         поезда</a>
                 </li>
