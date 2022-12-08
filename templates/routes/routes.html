@@ -2,6 +2,7 @@
 {% block title %}Поиск маршрута{% endblock title %}
 
 {% block content %}
-<h1>Поиск маршрута{</h1>
-    {% include "form.html" with button='Найти' btn='btn-primary' %}
+<h1>Поиск маршрута</h1>
+    {% url 'find_route' as action %}
+    {% include "form.html" with action=action button='Найти' btn='btn-primary' %}
 {% endblock content %}

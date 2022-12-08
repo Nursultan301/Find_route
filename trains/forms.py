@@ -11,6 +11,6 @@ class TrainForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'from_city': forms.Select(attrs={'class': 'form-control'}),
-            'to_city': forms.SelectMultiple(attrs={'class': 'form-control', 'required': False}),
+            'to_city': forms.Select(attrs={'class': 'form-control'}),
             'travel_time': forms.NumberInput(attrs={'class': 'form-control'}),
         }
