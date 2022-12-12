@@ -14,5 +14,3 @@ class TrainForm(forms.ModelForm):
             'to_city': forms.Select(attrs={'class': 'form-control'}),
             'travel_time': forms.NumberInput(attrs={'class': 'form-control'}),
         }
-
-

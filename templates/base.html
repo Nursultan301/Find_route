@@ -1,12 +1,15 @@
 <!doctype html>
 {% url 'cities:home' as cities_home_url %}
 {% url 'cities:create' as create %}
+{% url 'trains:train_create' as train_create %}
+{% url 'trains:train' as train %}
 {% load static %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
@@ -24,15 +27,23 @@
                     <a class="nav-link" href="{% url 'cities:home' %}">Города <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item {% if request.path == create %}active{% endif %}">
-                    <a class="nav-link" href="{% url 'cities:create' %}">Добавление города</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'trains:train' %}" tabindex="-1" aria-disabled="true">Поезд</a>
+                    <a class="nav-link" href="{% url 'cities:create' %}">Создать город</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'trains:train_create' %}" tabindex="-1" aria-disabled="true">Добавление пути</a>
+
+                <li class="nav-item {% if request.path == train %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'trains:train' %}" tabindex="-1" aria-disabled="true">Поезда</a>
                 </li>
+                <li class="nav-item {% if request.path == train_create %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'trains:train_create' %}" tabindex="-1" aria-disabled="true">Создать
+                        поезд</a>
+                </li>
+
+            <li class="nav-item">
+                    <a class="nav-link" href="{% url 'routes:home' %}" tabindex="-1" aria-disabled="true">Поиск
+                        поезда</a>
+                </li>
+
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -46,23 +57,23 @@
 
                 {#    проверка уровень сообщения#}
                 {% if messages %}
-                        {% for message in messages %}
-                            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    {{ message }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            {% else %}
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {{ message }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                 {% endif %}
                 {#    проверка уровень сообщения#}
             </div>
@@ -72,9 +83,20 @@
 <div class="container">
     {% block content %}{% endblock content %}
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
 
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
 
 </body>
 </html>
