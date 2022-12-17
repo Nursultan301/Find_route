@@ -3,6 +3,7 @@
 {% url 'cities:create' as create %}
 {% url 'trains:train_create' as train_create %}
 {% url 'trains:train' as train %}
+{% url 'routes:list' as list %}
 {% load static %}
 <html lang="en">
 <head>
@@ -42,6 +43,9 @@
             <li class="nav-item">
                     <a class="nav-link" href="{% url 'routes:home' %}" tabindex="-1" aria-disabled="true">Поиск
                         поезда</a>
+                </li>
+             <li class="nav-item {% if request.path == list %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'routes:list' %}" tabindex="-1" aria-disabled="true">Маршруты</a>
                 </li>
 
             </ul>

@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.views.generic import ListView, DetailView
 
 from cities.models import City
 from routes.forms import RouteForm, RouteModelForm
+from routes.models import Route
 from routes.services import get_routes
 from trains.models import Train
 
@@ -48,10 +50,35 @@ def add_route(request):
                     'travel_times': total_time,
                     'trains': qs
 
-                         }
+                }
             )
             context['form'] = form
         return render(request, 'routes/create.html', context)
     else:
         messages.error(request, "Нет данных для поиска")
         return redirect('/')
+
+
+def save_route(request):
+    if request.POST:
+        form = RouteModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Маршрут успешно сохранен")
+            return redirect('/')
+        return render(request, 'routes/create.html', {"form": form})
+    else:
+        messages.error(request, "Нет данных для поиска")
+        return redirect('/')
+
+
+class RouteListView(ListView):
+    paginate_by = 5
+    model = Route
+    template_name = 'routes/list.html'
+
+
+class RouteDetailView(DetailView):
+    queryset = Route.objects.all()
+    template_name = 'routes/detail.html'
+    context_object_name = 'object'
