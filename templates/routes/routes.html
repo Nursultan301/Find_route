@@ -6,8 +6,8 @@
     <div class="row">
         <div class="col-md-8 mx-auto">
             {% if routes %}
-                <h3>Маршрут{% if routes|length != 1 %}ы{% endif %} из г. {{ cities.from_city }}
-                    в. г {{ cities.to_city }}</h3>
+                <h3>Маршрут{% if routes|length != 1 %}ы{% endif %} из г. {{ cities.from_city.title }}
+                    в. г {{ cities.to_city.title }}</h3>
                 <br>
                 {% for route in routes %}
                     <form action="{% url 'routes:add_route' %}" method="post">{% csrf_token %}
