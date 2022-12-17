@@ -10,6 +10,7 @@ dist
 db.sqlite3
 
 .env
+.log
 venv
 celerybeat-schedule
 
