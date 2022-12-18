@@ -89,7 +89,7 @@ class RouteDetailView(DetailView):
     context_object_name = 'object'
 
 
-class RouteDeleteView(SuccessDeleteMessageMixin, DeleteView):
+class RouteDeleteView(SuccessDeleteMessageMixin, LoginRequiredMixin, DeleteView):
     model = Route
     template_name = 'routes/delete.html'
     success_url = reverse_lazy('cities:home')

@@ -15,7 +15,7 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light container ">
         <a class="navbar-brand" href="{% url 'cities:home' %}">FindRoute</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,18 +27,29 @@
                 <li class="nav-item {% if request.path == cities_home_url %}active{% endif %}">
                     <a class="nav-link" href="{% url 'cities:home' %}">Города <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item {% if request.path == create %}active{% endif %}">
-                    <a class="nav-link" href="{% url 'cities:create' %}">Создать город</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item {% if request.path == create %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'cities:create' %}">Создать город</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="">Создать город</a>
+                    </li>
+                {% endif %}
 
 
                 <li class="nav-item {% if request.path == train %}active{% endif %}">
                     <a class="nav-link" href="{% url 'trains:train' %}" tabindex="-1" aria-disabled="true">Поезда</a>
                 </li>
-                <li class="nav-item {% if request.path == train_create %}active{% endif %}">
-                    <a class="nav-link" href="{% url 'trains:train_create' %}" tabindex="-1" aria-disabled="true">Создать
-                        поезд</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item {% if request.path == train_create %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'trains:train_create' %}" tabindex="-1" aria-disabled="true">Создать поезд</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="">Создать поезд</a>
+                    </li>
+                {% endif %}
 
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'routes:home' %}" tabindex="-1" aria-disabled="true">Поиск
@@ -51,12 +62,12 @@
 
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:logout' %}" tabindex="-1"
+                        <a class="nav-link text-danger" href="{% url 'accounts:logout' %}" tabindex="-1"
                            aria-disabled="true">Выйти</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:login' %}" tabindex="-1"
+                        <a class="nav-link text-primary" href="{% url 'accounts:login' %}" tabindex="-1"
                            aria-disabled="true">Войти</a>
                     </li>
                 {% endif %}
@@ -66,6 +77,14 @@
 
         </div>
     </nav>
+
+
+
+
+
+
+
+
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto my-4">

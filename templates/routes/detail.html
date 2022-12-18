@@ -13,6 +13,7 @@
                     <th scope="col">Куда</th>
                     <th scope="col">Время пути</th>
                     <th scope="col">Список поездов по маршруту</th>
+                    <th>&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,13 @@
                                 <p>{{ train }} Время в пути {{ train.travel_time }}</p>
                             {% endfor %}
                         </td>
+                    <td>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'routes:delete' pk=object.pk %}">
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </a>
+                        {% endif %} &nbsp;
+                    </td>
                     </tr>
                 </tbody>
             </table>
