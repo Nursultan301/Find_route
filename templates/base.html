@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
@@ -40,13 +40,27 @@
                         поезд</a>
                 </li>
 
-            <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'routes:home' %}" tabindex="-1" aria-disabled="true">Поиск
                         поезда</a>
                 </li>
-             <li class="nav-item {% if request.path == list %}active{% endif %}">
+                <li class="nav-item {% if request.path == list %}active{% endif %}">
                     <a class="nav-link" href="{% url 'routes:list' %}" tabindex="-1" aria-disabled="true">Маршруты</a>
                 </li>
+
+
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:logout' %}" tabindex="-1"
+                           aria-disabled="true">Выйти</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:login' %}" tabindex="-1"
+                           aria-disabled="true">Войти</a>
+                    </li>
+                {% endif %}
+
 
             </ul>
 
@@ -93,7 +107,7 @@
         crossorigin="anonymous"></script>
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.js-example-basic-single').select2();
         $('.js-example-basic-multiple').select2();
     });

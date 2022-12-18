@@ -89,10 +89,12 @@ class RouteDetailView(DetailView):
     context_object_name = 'object'
 
 
-class RouteDeleteView(LoginRequiredMixin, SuccessDeleteMessageMixin, DeleteView):
+class RouteDeleteView(SuccessDeleteMessageMixin, DeleteView):
     model = Route
-    success_url = reverse_lazy('/')
+    template_name = 'routes/delete.html'
+    success_url = reverse_lazy('cities:home')
+    success_message = "Город успешно удален: %(title)s"
 
-    def get(self, request, *args, **kwargs):
-        messages.success(request, 'Маршрут успешно удален')
-        return self.post(request, *args, **kwargs)
+    def delete(self, request, *args, **kwargs):
+        self.add_success_message(self.request)
+        return super(RouteDeleteView, self).delete(request, *args, **kwargs)

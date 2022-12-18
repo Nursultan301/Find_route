@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import check_password
 User = get_user_model()
 
 
-class UserModelForm(forms.ModelForm):
+class UserLoginForm(forms.Form):
     username = forms.CharField(label='Логин',
                                widget=forms.TextInput(attrs={"class": "form-control", "placeholder": "Введите логин"}))
     password = forms.CharField(label='Логин',
