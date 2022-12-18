@@ -5,12 +5,12 @@ idea
 *.egg-info/
 .installed.cfg
 *.egg
+*.log
 
 dist
 db.sqlite3
 
 .env
-.log
 venv
 celerybeat-schedule
 
