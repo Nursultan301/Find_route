@@ -2,7 +2,47 @@
 {% block title %}Поиск маршрута{% endblock title %}
 
 {% block content %}
-<h1>Поиск маршрута</h1>
+    <h1>Поиск маршрута</h1>
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            {% if routes %}
+                <h3>Маршрут{% if routes|length != 1 %}ы{% endif %} из г. {{ cities.from_city.title }}
+                    в. г {{ cities.to_city.title }}</h3>
+                <br>
+                {% for route in routes %}
+                    <form action="{% url 'routes:add_route' %}" method="post">{% csrf_token %}
+                        <input type="hidden" name="from_city" value="{{ cities.from_city.id }}">
+                        <input type="hidden" name="to_city" value="{{ cities.to_city.id }}">
+                        <input type="hidden" name="total_time" value="{{ route.total_time }}">
+                        <input type="hidden" name="trains"
+                               value="{% for train in route.trains %} {{ train.id }},{% endfor %}">
+                        {% if forloop.first %}<h5>Самый которкий маршрут</h5>{% endif %}
+                        <h5>Время в пути {{ route.total_time }}</h5>
+                        <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Список поездов по этому маршруту</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for train in route.trains %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{{ train.title }} из г. {{ train.from_city.title }} в г. {{ train.to_city.title }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                        {% if user.is_authenticated %}
+                        <button type="submit" class="btn btn-success">Сохранить</button>
+                        {% endif %}
+                    </form>
+                    <br><br>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
     {% url 'routes:find_routes' as action %}
     {% include "form.html" with action=action button='Найти' btn='btn-primary' %}
 {% endblock content %}

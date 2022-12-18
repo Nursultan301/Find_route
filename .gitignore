@@ -5,6 +5,7 @@ idea
 *.egg-info/
 .installed.cfg
 *.egg
+*.log
 
 dist
 db.sqlite3
